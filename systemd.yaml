@@ -714,6 +714,38 @@ subpackages:
             ukify --help && echo "PASS: ukify --help exited 0" ||
                fail "ukify --help exited $?"
 
+  - name: "systemd-journal-gatewayd"
+    description: "HTTP server for journal events"
+    dependencies:
+      runtime:
+        - ${{package.name}}
+        - merged-lib
+        - merged-sbin
+        - merged-usrsbin
+        - wolfi-baselayout
+    pipeline:
+      - runs: |
+          mkdir -p "${{targets.subpkgdir}}/usr/lib/systemd/system"
+          mv "${{targets.destdir}}/usr/lib/systemd/systemd-journal-gatewayd" "${{targets.subpkgdir}}/usr/lib/systemd/"
+          mv "${{targets.destdir}}/usr/lib/systemd/system/systemd-journal-gatewayd.service" "${{targets.subpkgdir}}/usr/lib/systemd/system/"
+          mv "${{targets.destdir}}/usr/lib/systemd/system/systemd-journal-gatewayd.socket" "${{targets.subpkgdir}}/usr/lib/systemd/system/"
+
+  - name: "systemd-journal-remote"
+    description: "Receive journal messages over the network"
+    dependencies:
+      runtime:
+        - ${{package.name}}
+        - merged-lib
+        - merged-sbin
+        - merged-usrsbin
+        - wolfi-baselayout
+    pipeline:
+      - runs: |
+          mkdir -p "${{targets.subpkgdir}}/usr/lib/systemd/system"
+          mv "${{targets.destdir}}/usr/lib/systemd/systemd-journal-remote" "${{targets.subpkgdir}}/usr/lib/systemd/"
+          mv "${{targets.destdir}}/usr/lib/systemd/system/systemd-journal-remote.service" "${{targets.subpkgdir}}/usr/lib/systemd/system/"
+          mv "${{targets.destdir}}/usr/lib/systemd/system/systemd-journal-remote.socket" "${{targets.subpkgdir}}/usr/lib/systemd/system/"
+
 update:
   enabled: true
   github:
