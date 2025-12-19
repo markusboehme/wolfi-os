@@ -12,6 +12,12 @@ package:
     runtime:
       - dbus
       - kmod
+      - libacl1
+      - libaudit
+      - libblkid
+      - libmount
+      - libseccomp
+      - libselinux
       - merged-lib
       - merged-sbin
       - merged-usrsbin
@@ -53,13 +59,13 @@ environment:
       - findutils
       - gnutar
       - gperf
-      - iptables-dev
       - kmod
       - kmod-dev
       - libarchive-dev
       - libbpf
       - libbpf-dev
       - libcap-dev
+      - nftables-dev
       - libgcrypt-dev
       - libgpg-error-dev
       - libidn2-dev
